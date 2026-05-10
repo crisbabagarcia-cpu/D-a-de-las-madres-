@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search - La mejor mamá</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --google-blue: #4285f4; --google-red: #ea4335; --google-yellow: #fbbc05; --google-green: #34a853; --text-gray: #4d5156; }
+        body { font-family: 'Google Sans', Roboto, Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #202124; }
+        
+        /* Header Mejorado */
+        .header { display: flex; align-items: center; padding: 15px 20px; border-bottom: 1px solid #ebebeb; position: sticky; top: 0; background: #fff; z-index: 100; }
+        .logo { width: 92px; margin-right: 25px; }
+        .search-container { flex: 1; max-width: 690px; position: relative; }
+        .search-bar { width: 100%; border: 1px solid #dfe1e5; border-radius: 24px; height: 44px; padding: 0 45px; box-sizing: border-box; font-size: 16px; display: flex; align-items: center; box-shadow: 0 1px 6px rgba(32,33,36,0.28); }
+
+        /* Contenido */
+        .main-content { padding: 20px 20px 20px 150px; display: flex; gap: 40px; }
+        .results-side { flex: 2; max-width: 650px; }
+        .knowledge-graph { flex: 1; border: 1px solid #dfe1e5; border-radius: 8px; padding: 0; overflow: hidden; max-width: 370px; height: fit-content; }
+        
+        .stats { color: #70757a; font-size: 14px; margin-bottom: 15px; }
+        .result { margin-bottom: 28px; }
+        .result a { text-decoration: none; color: #1a0dab; }
+        .result h3 { font-size: 20px; margin: 0 0 4px 0; font-weight: 400; }
+        .result h3:hover { text-decoration: underline; }
+        .url { font-size: 14px; color: #202124; margin-bottom: 4px; display: block; }
+        .description { font-size: 14px; line-height: 1.5; color: #4d5156; }
+
+        /* Panel de Información (Ficha) */
+        .kg-header { background: #f8f9fa; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 50px; border-bottom: 1px solid #dfe1e5; }
+        .kg-body { padding: 15px; }
+        .kg-title { font-size: 24px; margin-bottom: 5px; }
+        .kg-subtitle { color: #70757a; font-size: 14px; margin-bottom: 15px; border-bottom: 1px solid #ebebeb; padding-bottom: 10px; }
+        .kg-info { font-size: 14px; line-height: 1.6; }
+        .kg-info b { color: #202124; }
+
+        /* Estilo para Móvil */
+        @media (max-width: 900px) {
+            .main-content { padding: 20px; flex-direction: column; }
+            .header { padding: 10px; }
+            .logo { width: 70px; margin-right: 10px; }
+            .knowledge-graph { order: -1; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" class="logo" alt="Google">
+        <div class="search-container">
+            <div class="search-bar" id="typing-text"></div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="results-side">
+            <div class="stats">Cerca de 8,000,000,000 resultados (0.42 segundos)</div>
+
+            <div class="result">
+                <span class="url">https://amor.eterno › mama › hilda</span>
+                <a href="#"><h3>Hilda Hernández: La definición de amor incondicional</h3></a>
+                <p class="description">Descubre por qué <b>Hilda Hernández</b> es considerada la mejor mamá del mundo. Su dedicación, fuerza y bondad han marcado un récord histórico en el corazón de su familia.</p>
+            </div>
+
+            <div class="result">
+                <span class="url">https://hijo-orgulloso.mx › gracias</span>
+                <a href="#"><h3>¿Por qué mi mamá es la número 1?</h3></a>
+                <p class="description">Análisis completo sobre los superpoderes de mamá: cocina increíble, consejos sabios y la capacidad de encontrar cosas perdidas en segundos. <b>Te quiero mucho, mamá.</b></p>
+            </div>
+        </div>
+
+        <div class="knowledge-graph">
+            <div class="kg-header">❤️</div>
+            <div class="kg-body">
+                <div class="kg-title">Hilda Hernández</div>
+                <div class="kg-subtitle">Madre, Guía y Superhéroe</div>
+                <div class="kg-info">
+                    <p><b>Nacimiento:</b> El día que el mundo se hizo más bonito.</p>
+                    <p><b>Habilidades:</b> Paciencia infinita, Abrazos curativos, Chef nivel experto.</p>
+                    <p><b>Premios:</b> Medalla de oro al Corazón más Grande (2026).</p>
+                    <p><b>Hijos:</b> Cristian (y su mayor orgullo).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Efecto de escritura en la barra de búsqueda
+        const text = "La mejor mamá del mundo...";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("typing-text").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                startConfetti();
+            }
+        }
+
+        function startConfetti() {
+            var end = Date.now() + (4 * 1000);
+            var colors = ['#4285f4', '#ea4335', '#fbbc05', '#34a853'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>
